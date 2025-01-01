@@ -103,14 +103,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //    ├──────┼─────────┼─────────┼──────┼─────────┼─────────┤                    ├──────┼─────┼─────┼─────┼─────┼─────┤
 //    │ volu │  lctl   │  lsft   │ lgui │  lalt   │  mply   │                    │  no  │ f1  │ f2  │ f3  │ f4  │ ent │
 //    ├──────┼─────────┼─────────┼──────┼─────────┼─────────┤                    ├──────┼─────┼─────┼─────┼─────┼─────┤
-//    │  no  │  vold   │   no    │  no  │ SGUI(d) │  mprv   │                    │  no  │ f9  │ f10 │ f11 │ f12 │ no  │
+//    │ vold │   no    │   no    │  no  │ SGUI(d) │  mprv   │                    │  no  │ f9  │ f10 │ f11 │ f12 │ no  │
 //    └──────┴─────────┴─────────┴──────┼─────────┼─────────┼─────┐       ┌──────┼──────┼─────┼─────┴─────┴─────┴─────┘
 //                                      │         │ MO(SYM) │ f20 │       │ lsft │ bspc │ del │
 //                                      └─────────┴─────────┴─────┘       └──────┴──────┴─────┘
 [FN] = LAYOUT_split_3x6_3(
   KC_MUTE , RGB_VAD , RGB_VAI , KC_BRID , KC_BRIU    , KC_MNXT ,                            KC_NO   , KC_F5  , KC_F6  , KC_F7  , KC_F8  , KC_NO ,
   KC_VOLU , KC_LCTL , KC_LSFT , KC_LGUI , KC_LALT    , KC_MPLY ,                            KC_NO   , KC_F1  , KC_F2  , KC_F3  , KC_F4  , KC_ENT,
-  KC_NO   , KC_VOLD , KC_NO   , KC_NO   , SGUI(KC_D) , KC_MPRV ,                            KC_NO   , KC_F9  , KC_F10 , KC_F11 , KC_F12 , KC_NO ,
+  KC_VOLD , KC_NO   , KC_NO   , KC_NO   , SGUI(KC_D) , KC_MPRV ,                            KC_NO   , KC_F9  , KC_F10 , KC_F11 , KC_F12 , KC_NO ,
                                           _______    , MO(SYM) , KC_F20 ,         KC_LSFT , KC_BSPC , KC_DEL
 )
 };
@@ -201,18 +201,18 @@ const key_override_t override_shift_lbracket_rbracket = ko_make_with_layers_and_
 const key_override_t override_lbracket_rbracket       = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_LBRACKET, KC_RBRACKET, 0xFFFF, 0);
 
 // < > = ~
-const key_override_t override_shift_comma_equal = ko_make_with_layers_and_negmods(MOD_MASK_SA, S(KC_COMMA), KC_EQUAL, 0xFFFE, 0);
+const key_override_t override_shift_comma_equal = ko_make_with_layers_and_negmods(MOD_MASK_SA, S(KC_COMMA), KC_EQUAL, 0xFFFF, 0);
 const key_override_t override_shift_comma_dot   = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, S(KC_COMMA), S(KC_DOT), 0xFFFF, 0);
-const key_override_t override_shift_comma_grave = ko_make_with_layers_and_negmods(MOD_MASK_ALT, S(KC_COMMA), S(KC_GRAVE), 0xFFFE, 0);
+const key_override_t override_shift_comma_grave = ko_make_with_layers_and_negmods(MOD_MASK_ALT, S(KC_COMMA), S(KC_GRAVE), 0xFFFF, 0);
 
 // /\&|
-const key_override_t override_slash_shift7       = ko_make_with_layers_and_negmods(MOD_MASK_SA, KC_SLASH, S(KC_7), 0xFFFE, 0);
-const key_override_t override_slash_bslash_shift = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_SLASH, KC_BSLASH, 0xFFFE, 0);
-const key_override_t override_slash_bslash_ag    = ko_make_with_layers_and_negmods(MOD_MASK_ALT, KC_SLASH, S(KC_BSLASH), 0xFFFE, 0);
+const key_override_t override_slash_shift7       = ko_make_with_layers_and_negmods(MOD_MASK_SA, KC_SLASH, S(KC_7), 0xFFFF, 0);
+const key_override_t override_slash_bslash_shift = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_SLASH, KC_BSLASH, 0xFFFF, 0);
+const key_override_t override_slash_bslash_ag    = ko_make_with_layers_and_negmods(MOD_MASK_ALT, KC_SLASH, S(KC_BSLASH), 0xFFFF, 0);
 
 // .,?!
-const key_override_t override_f13_shift1      = ko_make_with_layers_and_negmods(MOD_MASK_SA, KC_F13, S(KC_1), 0xFFFE, 0);
-const key_override_t override_f13_comma       = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_F13, KC_COMMA, 0xFFFE, 0);
+const key_override_t override_f13_shift1      = ko_make_with_layers_and_negmods(MOD_MASK_SA, KC_F13, S(KC_1), 0xFFFF, 0);
+const key_override_t override_f13_comma       = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_F13, KC_COMMA, 0xFFFF, 0);
 const key_override_t override_f13_shift_slash = ko_make_with_layers_and_negmods(MOD_MASK_ALT, KC_F13, S(KC_SLASH), 0xFFFF, 0);
 const key_override_t override_f13_dot         = ko_make_basic(0, KC_F13, KC_DOT);
 
