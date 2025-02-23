@@ -137,7 +137,8 @@ const uint16_t PROGMEM combo_g_h[]       = {KC_G, KC_H, COMBO_END};
 /* const uint16_t PROGMEM combo_lsft_lgui[] = {OSM(MOD_LSFT), OSM(MOD_LGUI), COMBO_END}; */
 /* const uint16_t PROGMEM combo_lctl_lsft[] = {OSM(MOD_LCTL), OSM(MOD_LSFT), COMBO_END}; */
 /* const uint16_t PROGMEM combo_lctl_lgui[] = {OSM(MOD_LCTL), OSM(MOD_LGUI), COMBO_END}; */
-const uint16_t PROGMEM combo_lctrl_r[]   = {LCTL_T(KC_A), LSFT_T(KC_S), COMBO_END};
+
+/* const uint16_t PROGMEM combo_lctrl_r[]   = {LCTL_T(KC_A), LSFT_T(KC_S), COMBO_END}; */
 const uint16_t PROGMEM combo_lt_shift[]  = {LT(NAV, KC_SPC), KC_LSFT, COMBO_END}; // New combo
 
 const uint16_t PROGMEM leader_combo[] = {LALT_T(KC_F), KC_R, COMBO_END};
@@ -150,7 +151,7 @@ combo_t key_combos[COMBO_LENGTH] = {
     /* [SHIFT_GUI_COMBO] = COMBO(combo_lsft_lgui, OSM(MOD_LSFT | MOD_LGUI)), */
     /* [CTRL_SHIFT_COMBO] = COMBO(combo_lctl_lsft, OSM(MOD_LCTL | MOD_LSFT)), */
     /* [CTRL_GUI_COMBO] = COMBO(combo_lctl_lgui, OSM(MOD_LCTL | MOD_LGUI)), */
-    [CTRL_R_COMBO] = COMBO(combo_lctrl_r, LCTL(LSFT(KC_NO))),
+    /* [CTRL_R_COMBO] = COMBO(combo_lctrl_r, LCTL(LSFT(KC_NO))), */
     [NAV_SHIFT_COMBO] = COMBO(combo_lt_shift, MO(NAVMOD)),
     [LEADER] = COMBO(leader_combo, QK_LEAD),
     [ERE_COMBO] = COMBO_ACTION(ere_combo),
