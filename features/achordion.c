@@ -338,12 +338,16 @@ __attribute__((weak)) bool achordion_chord(uint16_t tap_hold_keycode,
                                            keyrecord_t* other_record) {
 
   switch (tap_hold_keycode) {
-    case LCTL_T(KC_A) :  // A + U.
+    case LCTL_T(KC_A) :  // lctrl + r
       if (other_keycode == LSFT_T(KC_S)) { return false; }
       break;
-    }
-  switch (tap_hold_keycode) {
-    case RGUI_T(KC_J) :  // A + U.
+    case RCTL_T(KC_SCLN) :  // rctrl + r
+      if (other_keycode == LSFT_T(KC_S)) { return false; }
+      break;
+    case LGUI_T(KC_D) :  // A + U.
+      if (other_keycode == LALT_T(KC_F)) { return false; }
+      break;
+    case RGUI_T(KC_J) :  // ??? mistake?
       if (other_keycode == RALT_T(KC_K)) { return false; }
       break;
     }
@@ -356,12 +360,13 @@ __attribute__((weak)) bool achordion_chord(uint16_t tap_hold_keycode,
 
 // By default, the timeout is 1000 ms for all keys.
 __attribute__((weak)) uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
-  return 320;
+  return 1000;
 }
 
 // By default, Shift and Ctrl mods are eager, and Alt and GUI are not.
 __attribute__((weak)) bool achordion_eager_mod(uint8_t mod) {
-  return (mod & (MOD_LALT | MOD_LGUI)) == 0;
+  /* return (mod & (MOD_LALT | MOD_LGUI)) == 0; */
+    return false;
 }
 
 #ifdef ACHORDION_STREAK
