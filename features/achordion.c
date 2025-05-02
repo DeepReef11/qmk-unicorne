@@ -337,6 +337,7 @@ __attribute__((weak)) bool achordion_chord(uint16_t tap_hold_keycode,
                                            uint16_t other_keycode,
                                            keyrecord_t* other_record) {
 
+    // This is where key combo to prevent are defined
   switch (tap_hold_keycode) {
     case LCTL_T(KC_A) :  // lctrl + r
       if (other_keycode == LSFT_T(KC_S)) { return false; }
@@ -347,10 +348,12 @@ __attribute__((weak)) bool achordion_chord(uint16_t tap_hold_keycode,
     case LGUI_T(KC_D) :  // A + U.
       if (other_keycode == LALT_T(KC_F)) { return false; }
       break;
-    case RGUI_T(KC_J) :  // ??? mistake?
+    case RGUI_T(KC_J) : // E + N
       if (other_keycode == RALT_T(KC_K)) { return false; }
       break;
     }
+
+    // Disabled opposite hand because unused
   /*     if (other_record->event.key.row % (MATRIX_ROWS) >= 3) { */
   /**/
   /* return achordion_opposite_hands(tap_hold_record, other_record); */
