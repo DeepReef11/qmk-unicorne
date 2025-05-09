@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //    ┌──────┬────────────┬────────────┬────────────┬────────────┬────────────┐                             ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
 //    │ S(,) │    esc     │ S(LCTL(z)) │ S(LCTL(x)) │ S(LCTL(v)) │ S(LCTL(b)) │                             │ LSFT(1) │ LSFT(2) │ LSFT(3) │ LSFT(4) │ LSFT(5) │   no    │
 //    ├──────┼────────────┼────────────┼────────────┼────────────┼────────────┤                             ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-//    │ f13  │    aCL0    │    wh_d    │    wh_u    │    aCL2    │     g      │                             │  S(-)   │  home   │  pgdn   │  pgup   │   end   │ LSFT(4) │
+//    │ f13  │    lctl    │    lsft    │    lgui    │    lalt    │     g      │                             │  S(-)   │  home   │  pgdn   │  pgup   │   end   │ LSFT(4) │
 //    ├──────┼────────────┼────────────┼────────────┼────────────┼────────────┤                             ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
 //    │  '   │ S(LCTL(s)) │     no     │     no     │   S(tab)   │     no     │                             │ LSFT(6) │ LSFT(7) │ LSFT(8) │ LSFT(9) │ LSFT(0) │    /    │
 //    └──────┴────────────┴────────────┴────────────┼────────────┼────────────┼──────────────┐       ┌──────┼─────────┼─────────┼─────────┴─────────┴─────────┴─────────┘
@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                                  └────────────┴────────────┴──────────────┘       └──────┴─────────┴─────────┘
 [NAVMOD] = LAYOUT_split_3x6_3(
   S(KC_COMM) , KC_ESC        , S(LCTL(KC_Z)) , S(LCTL(KC_X)) , S(LCTL(KC_V)) , S(LCTL(KC_B)) ,                                     LSFT(KC_1) , LSFT(KC_2) , LSFT(KC_3) , LSFT(KC_4) , LSFT(KC_5) , KC_NO     ,
-  KC_F13     , KC_ACL0       , KC_WH_D       , KC_WH_U       , KC_ACL2       , KC_G          ,                                     S(KC_MINS) , KC_HOME    , KC_PGDN    , KC_PGUP    , KC_END     , LSFT(KC_4),
+  KC_F13     , KC_LCTL       , KC_LSFT       , KC_LGUI       , KC_LALT       , KC_G          ,                                     S(KC_MINS) , KC_HOME    , KC_PGDN    , KC_PGUP    , KC_END     , LSFT(KC_4),
   KC_QUOT    , S(LCTL(KC_S)) , KC_NO         , KC_NO         , S(KC_TAB)     , KC_NO         ,                                     LSFT(KC_6) , LSFT(KC_7) , LSFT(KC_8) , LSFT(KC_9) , LSFT(KC_0) , KC_SLSH   ,
                                                                _______       , MO(SYM)       , LT(NAV, KC_SPC) ,         KC_LSFT , KC_BSPC    , KC_DEL
 ),
