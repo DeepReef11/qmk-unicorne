@@ -10,6 +10,35 @@
 
 #define COMBO_SHOULD_TRIGGER
 
+// MOUSE CONTROL
+#define MOUSEKEY_MOVE_DELTA 10
+
+#define MK_3_SPEED
+
+// Acceleration 0 (Slow)
+#define MK_C_OFFSET_0 8
+#define MK_C_INTERVAL_0 16
+
+// Acceleration 1 (Medium)
+#define MK_C_OFFSET_1 16
+#define MK_C_INTERVAL_1 16
+
+// Acceleration 2 (Fast)
+#define MK_C_OFFSET_2 32
+#define MK_C_INTERVAL_2 16
+
+// Default mouse wheel settings
+// Acceleration 0 (Slow)
+#define MK_W_OFFSET_0 1
+#define MK_W_INTERVAL_0 100
+
+// Acceleration 1 (Medium)
+#define MK_W_OFFSET_1 3
+#define MK_W_INTERVAL_1 50
+
+// Acceleration 2 (Fast)
+#define MK_W_OFFSET_2 8
+#define MK_W_INTERVAL_2 20
 
 #define RGB_MATRIX_KEYRELEASES
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS

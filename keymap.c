@@ -11,6 +11,15 @@
 #    include "keymap.h"
 #endif
 
+enum custom_keycodes {
+    // Other custom keycodes...
+    MS_STEP_UP = SAFE_RANGE,
+    MS_STEP_DOWN,
+    MS_STEP_LEFT,
+    MS_STEP_RIGHT,
+};
+
+
 enum layers { BASEMOD, NAV, NAVMOD, SYM, MOUSE, FN };
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //    ┌──────┬───────────┬───────────┬───────────┬───────────────┬─────────┐                             ┌─────────────────┬─────────────┬───────────┬───────────┬───────────┬──────┐
@@ -77,20 +86,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                _______       , _______    , _______ ,         KC_LSFT , KC_BSPC    , KC_DEL
 ),
 
-//    ┌──────┬──────┬──────┬──────┬──────┬─────────┐                     ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-//    │ S(,) │ esc  │ btn3 │ btn2 │ btn1 │   no    │                     │ LSFT(1) │ LSFT(2) │ LSFT(3) │ LSFT(4) │ LSFT(5) │   no    │
-//    ├──────┼──────┼──────┼──────┼──────┼─────────┤                     ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-//    │ f13  │ aCL0 │ wh_d │ wh_u │ aCL2 │    g    │                     │  S(-)   │  ms_l   │  ms_d   │  ms_u   │  ms_r   │ LSFT(4) │
-//    ├──────┼──────┼──────┼──────┼──────┼─────────┤                     ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
-//    │  '   │  no  │  no  │  no  │ tab  │   no    │                     │ LSFT(6) │ LSFT(7) │ LSFT(8) │ LSFT(9) │ LSFT(0) │    /    │
-//    └──────┴──────┴──────┴──────┼──────┼─────────┼──────┐       ┌──────┼─────────┼─────────┼─────────┴─────────┴─────────┴─────────┘
-//                                │      │ MO(SYM) │ aCL2 │       │ lsft │  bspc   │   del   │
-//                                └──────┴─────────┴──────┘       └──────┴─────────┴─────────┘
+//    ┌──────┬──────┬──────┬──────┬──────┬─────────┐                     ┌─────────┬──────────────┬──────────────┬────────────┬───────────────┬─────────┐
+//    │ S(,) │ esc  │ btn3 │ btn2 │ btn1 │   no    │                     │ LSFT(1) │ MS_STEP_LEFT │ MS_STEP_DOWN │ MS_STEP_UP │ MS_STEP_RIGHT │   no    │
+//    ├──────┼──────┼──────┼──────┼──────┼─────────┤                     ├─────────┼──────────────┼──────────────┼────────────┼───────────────┼─────────┤
+//    │ f13  │ aCL0 │ wh_d │ wh_u │ aCL2 │    g    │                     │  S(-)   │     ms_l     │     ms_d     │    ms_u    │     ms_r      │ LSFT(4) │
+//    ├──────┼──────┼──────┼──────┼──────┼─────────┤                     ├─────────┼──────────────┼──────────────┼────────────┼───────────────┼─────────┤
+//    │  '   │  no  │  no  │  no  │ tab  │   no    │                     │ LSFT(6) │   LSFT(7)    │   LSFT(8)    │  LSFT(9)   │    LSFT(0)    │    /    │
+//    └──────┴──────┴──────┴──────┼──────┼─────────┼──────┐       ┌──────┼─────────┼──────────────┼──────────────┴────────────┴───────────────┴─────────┘
+//                                │      │ MO(SYM) │ aCL1 │       │ lsft │  bspc   │     del      │
+//                                └──────┴─────────┴──────┘       └──────┴─────────┴──────────────┘
 [MOUSE] = LAYOUT_split_3x6_3(
-  S(KC_COMM) , KC_ESC  , KC_BTN3 , KC_BTN2 , KC_BTN1 , KC_NO   ,                             LSFT(KC_1) , LSFT(KC_2) , LSFT(KC_3) , LSFT(KC_4) , LSFT(KC_5) , KC_NO     ,
-  KC_F13     , KC_ACL0 , KC_WH_D , KC_WH_U , KC_ACL2 , KC_G    ,                             S(KC_MINS) , KC_MS_L    , KC_MS_D    , KC_MS_U    , KC_MS_R    , LSFT(KC_4),
-  KC_QUOT    , KC_NO   , KC_NO   , KC_NO   , KC_TAB  , KC_NO   ,                             LSFT(KC_6) , LSFT(KC_7) , LSFT(KC_8) , LSFT(KC_9) , LSFT(KC_0) , KC_SLSH   ,
-                                             _______ , MO(SYM) , KC_ACL2 ,         KC_LSFT , KC_BSPC    , KC_DEL
+  S(KC_COMM) , KC_ESC  , KC_BTN3 , KC_BTN2 , KC_BTN1 , KC_NO   ,                             LSFT(KC_1) , MS_STEP_LEFT , MS_STEP_DOWN , MS_STEP_UP , MS_STEP_RIGHT , KC_NO     ,
+  KC_F13     , KC_ACL0 , KC_WH_D , KC_WH_U , KC_ACL2 , KC_G    ,                             S(KC_MINS) , KC_MS_L      , KC_MS_D      , KC_MS_U    , KC_MS_R       , LSFT(KC_4),
+  KC_QUOT    , KC_NO   , KC_NO   , KC_NO   , KC_TAB  , KC_NO   ,                             LSFT(KC_6) , LSFT(KC_7)   , LSFT(KC_8)   , LSFT(KC_9) , LSFT(KC_0)    , KC_SLSH   ,
+                                             _______ , MO(SYM) , KC_ACL1 ,         KC_LSFT , KC_BSPC    , KC_DEL
 ),
 
 //    ┌──────┬─────────┬─────────┬──────┬─────────┬──────┐                    ┌──────┬─────┬─────┬─────┬─────┬─────┐
@@ -265,6 +274,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (!process_achordion(keycode, record)) {
         return false;
     }
+
+   switch (keycode) {
+        case MS_STEP_UP:
+            if (record->event.pressed) {
+                tap_code16(KC_MS_UP);
+            }
+            return false;
+        case MS_STEP_DOWN:
+            if (record->event.pressed) {
+                tap_code16(KC_MS_DOWN);
+            }
+            return false;
+        case MS_STEP_LEFT:
+            if (record->event.pressed) {
+                tap_code16(KC_MS_LEFT);
+            }
+            return false;
+        case MS_STEP_RIGHT:
+            if (record->event.pressed) {
+                tap_code16(KC_MS_RIGHT);
+            }
+            return false;
+    }
+
     /* if (record->event.key.row * MATRIX_COLS + record->event.key.col == IK_RALT) { */
     /*     ik_ralt_pressed = record->event.pressed; */
     /* } */
