@@ -13,6 +13,12 @@
 // MOUSE CONTROL
 #define MOUSEKEY_MOVE_DELTA 10
 
+// Grid movement configuration
+#define GRID_SIZE_DEFAULT 60
+#define GRID_SIZE_STEP 20
+#define GRID_SIZE_MIN 20
+#define GRID_SIZE_MAX 120
+
 #define MK_3_SPEED
 
 // Acceleration 0 (Slow)
