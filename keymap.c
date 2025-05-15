@@ -1,36 +1,12 @@
-#include "keymap_us.h"
-#include "quantum_keycodes.h"
-#include QMK_KEYBOARD_H
-
-#include "debug.h"
-#include "quantum.h"
+#include "keymap.h"
 #include "features/achordion.h"
-#include "print.h"
+#include "features/rgb_indicators.h"
+#include "keys/combos.h"
+#include "keys/key_overrides.h"
+#include "keys/mouse_control.h"
 #include "leader.h"
 
-#include "pointing_device.h"
-#include "mousekey.h"
-
-#if __has_include("keymap.h")
-#    include "keymap.h"
-#endif
-
-enum custom_keycodes {
-    // Other custom keycodes...
-    MS_STEP_UP = SAFE_RANGE,
-    MS_STEP_DOWN,
-    MS_STEP_LEFT,
-    MS_STEP_RIGHT,
-    MS_GRID_LEFT,
-    MS_GRID_RIGHT,
-    MS_GRID_UP,
-    MS_GRID_DOWN,
-    MS_GRID_SIZE_RESET,
-    MS_GRID_SIZE_UP,
-    MS_GRID_SIZE_DOWN,
-};
-
-enum layers { BASEMOD, NAV, NAVMOD, SYM, MOUSE, FN };
+// Keymaps definition
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //    ┌──────┬───────────┬───────────┬───────────┬───────────────┬─────────┐                             ┌─────────────────┬─────────────┬───────────┬───────────┬───────────┬──────┐
 //    │ S(,) │     q     │     w     │     e     │       r       │    t    │                             │        y        │      u      │     i     │     o     │     p     │ bspc │
@@ -96,20 +72,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                _______       , _______    , _______ ,         KC_LSFT , KC_BSPC    , KC_DEL
 ),
 
-//    ┌──────┬──────┬──────┬──────┬──────┬───────────────────┐                     ┌─────────┬──────────────┬──────────────┬────────────┬───────────────┬─────────┐
-//    │ S(,) │ esc  │ btn3 │ btn2 │ btn1 │  MS_GRID_SIZE_UP  │                     │ LSFT(1) │ MS_STEP_LEFT │ MS_STEP_DOWN │ MS_STEP_UP │ MS_STEP_RIGHT │   no    │
-//    ├──────┼──────┼──────┼──────┼──────┼───────────────────┤                     ├─────────┼──────────────┼──────────────┼────────────┼───────────────┼─────────┤
-//    │ f13  │ aCL0 │ wh_d │ wh_u │ aCL2 │ MS_GRID_SIZE_boot │                     │  S(-)   │     ms_l     │     ms_d     │    ms_u    │     ms_r      │ LSFT(4) │
-//    ├──────┼──────┼──────┼──────┼──────┼───────────────────┤                     ├─────────┼──────────────┼──────────────┼────────────┼───────────────┼─────────┤
-//    │  '   │  no  │  no  │  no  │ tab  │ MS_GRID_SIZE_DOWN │                     │ LSFT(6) │ MS_GRID_LEFT │ MS_GRID_DOWN │ MS_GRID_UP │ MS_GRID_RIGHT │    /    │
-//    └──────┴──────┴──────┴──────┼──────┼───────────────────┼──────┐       ┌──────┼─────────┼──────────────┼──────────────┴────────────┴───────────────┴─────────┘
-//                                │      │      MO(SYM)      │ aCL1 │       │ lsft │  bspc   │     del      │
-//                                └──────┴───────────────────┴──────┘       └──────┴─────────┴──────────────┘
+//    ┌──────┬─────────┬──────┬──────┬─────────┬───────────────────┐                        ┌─────────┬──────────────┬──────────────┬────────────┬───────────────┬─────────┐
+//    │ S(,) │   esc   │ btn3 │ btn2 │  btn1   │  MS_GRID_SIZE_UP  │                        │ LSFT(1) │ MS_STEP_LEFT │ MS_STEP_DOWN │ MS_STEP_UP │ MS_STEP_RIGHT │   no    │
+//    ├──────┼─────────┼──────┼──────┼─────────┼───────────────────┤                        ├─────────┼──────────────┼──────────────┼────────────┼───────────────┼─────────┤
+//    │ f13  │ MS_ACL0 │ wh_d │ wh_u │ MS_ACL2 │ MS_GRID_SIZE_boot │                        │  S(-)   │     ms_l     │     ms_d     │    ms_u    │     ms_r      │ LSFT(4) │
+//    ├──────┼─────────┼──────┼──────┼─────────┼───────────────────┤                        ├─────────┼──────────────┼──────────────┼────────────┼───────────────┼─────────┤
+//    │  '   │   no    │  no  │  no  │   tab   │ MS_GRID_SIZE_DOWN │                        │ LSFT(6) │ MS_GRID_LEFT │ MS_GRID_DOWN │ MS_GRID_UP │ MS_GRID_RIGHT │    /    │
+//    └──────┴─────────┴──────┴──────┼─────────┼───────────────────┼─────────┐       ┌──────┼─────────┼──────────────┼──────────────┴────────────┴───────────────┴─────────┘
+//                                   │         │      MO(SYM)      │ MS_ACL1 │       │ lsft │  bspc   │     del      │
+//                                   └─────────┴───────────────────┴─────────┘       └──────┴─────────┴──────────────┘
 [MOUSE] = LAYOUT_split_3x6_3(
   S(KC_COMM) , KC_ESC  , KC_BTN3 , KC_BTN2 , KC_BTN1 , MS_GRID_SIZE_UP    ,                             LSFT(KC_1) , MS_STEP_LEFT , MS_STEP_DOWN , MS_STEP_UP , MS_STEP_RIGHT , KC_NO     ,
-  KC_F13     , KC_ACL0 , KC_WH_D , KC_WH_U , KC_ACL2 , MS_GRID_SIZE_RESET ,                             S(KC_MINS) , KC_MS_L      , KC_MS_D      , KC_MS_U    , KC_MS_R       , LSFT(KC_4),
+  KC_F13     , MS_ACL0 , KC_WH_D , KC_WH_U , MS_ACL2 , MS_GRID_SIZE_RESET ,                             S(KC_MINS) , KC_MS_L      , KC_MS_D      , KC_MS_U    , KC_MS_R       , LSFT(KC_4),
   KC_QUOT    , KC_NO   , KC_NO   , KC_NO   , KC_TAB  , MS_GRID_SIZE_DOWN  ,                             LSFT(KC_6) , MS_GRID_LEFT , MS_GRID_DOWN , MS_GRID_UP , MS_GRID_RIGHT , KC_SLSH   ,
-                                             _______ , MO(SYM)            , KC_ACL1 ,         KC_LSFT , KC_BSPC    , KC_DEL
+                                             _______ , MO(SYM)            , MS_ACL1 ,         KC_LSFT , KC_BSPC    , KC_DEL
 ),
 
 //    ┌──────┬─────────┬─────────┬──────┬─────────┬──────┐                    ┌──────┬─────┬─────┬─────┬─────┬─────┐
@@ -129,85 +105,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 )
 };
 
-/* tap_dance_action_t tap_dance_actions[] = {[0] = ACTION_TAP_DANCE_DOUBLE( */
-/*     LSFT(KC_9), */
-/*     LSFT(KC_0) */
-/* ), [1] = ACTION_TAP_DANCE_DOUBLE( */
-/*     LSFT(KC_LBRC), */
-/*     LSFT(KC_RBRC) */
-/* ), [2] = ACTION_TAP_DANCE_DOUBLE( */
-/*     KC_LBRC, */
-/*     KC_RBRC */
-/* ), [3] = ACTION_TAP_DANCE_DOUBLE( */
-/*     LSFT(KC_COMM), */
-/*     LSFT(KC_DOT) */
-/* )}; */
-
-enum combo_events {
-    CAPS_LOCK_COMBO,
-    /* SHIFT_GUI_COMBO, */
-    /* CTRL_SHIFT_COMBO, */
-    /* CTRL_GUI_COMBO, */
-    CTRL_R_COMBO,
-    NAV_SHIFT_COMBO, // New combo
-    LEADER,
-    ERE_COMBO, // k+i+r for direct combo
-    RALT_COMBO,
-    /* F13_EXLM_COMBO, */
-    F13_QUES_COMBO,
-    COMBO_LENGTH
-};
-
-// Define the key combinations
-const uint16_t PROGMEM combo_g_h[] = {KC_G, KC_H, COMBO_END};
-/* const uint16_t PROGMEM combo_lsft_lgui[] = {OSM(MOD_LSFT), OSM(MOD_LGUI), COMBO_END}; */
-/* const uint16_t PROGMEM combo_lctl_lsft[] = {OSM(MOD_LCTL), OSM(MOD_LSFT), COMBO_END}; */
-/* const uint16_t PROGMEM combo_lctl_lgui[] = {OSM(MOD_LCTL), OSM(MOD_LGUI), COMBO_END}; */
-
-/* const uint16_t PROGMEM combo_lctrl_r[]   = {LCTL_T(KC_A), LSFT_T(KC_S), COMBO_END}; */
-const uint16_t PROGMEM combo_lt_shift[] = {LT(NAV, KC_SPC), KC_LSFT, COMBO_END}; // New combo
-
-const uint16_t PROGMEM leader_combo[] = {LALT_T(KC_F), KC_R, COMBO_END};
-const uint16_t PROGMEM ere_combo[]    = {LALT_T(KC_F), KC_R, LSFT_T(KC_S), COMBO_END};
-const uint16_t PROGMEM ralt_combo[]   = {RALT_T(KC_J), KC_U, COMBO_END};
-/* const uint16_t PROGMEM f13_exlm_combo[] = {LALT_T(KC_F), LSFT_T(KC_S), KC_F13, COMBO_END}; */
-const uint16_t PROGMEM f13_ques_combo[] = {LALT_T(KC_F), KC_F13, COMBO_END};
-
-// Define the combo actions
-combo_t key_combos[COMBO_LENGTH] = {[CAPS_LOCK_COMBO] = COMBO(combo_g_h, KC_CAPS),
-                                    /* [SHIFT_GUI_COMBO] = COMBO(combo_lsft_lgui, OSM(MOD_LSFT | MOD_LGUI)), */
-                                    /* [CTRL_SHIFT_COMBO] = COMBO(combo_lctl_lsft, OSM(MOD_LCTL | MOD_LSFT)), */
-                                    /* [CTRL_GUI_COMBO] = COMBO(combo_lctl_lgui, OSM(MOD_LCTL | MOD_LGUI)), */
-                                    /* [CTRL_R_COMBO] = COMBO(combo_lctrl_r, LCTL(LSFT(KC_NO))), */
-                                    [NAV_SHIFT_COMBO] = COMBO(combo_lt_shift, MO(NAVMOD)),
-                                    [LEADER]          = COMBO(leader_combo, QK_LEAD),
-                                    [ERE_COMBO]       = COMBO_ACTION(ere_combo),
-                                    [RALT_COMBO]      = COMBO(ralt_combo, KC_RALT),
-                                    /* [F13_EXLM_COMBO]  = COMBO(f13_exlm_combo, KC_EXLM), */
-                                    [F13_QUES_COMBO] = COMBO(f13_ques_combo, KC_QUES)};
-
-static bool ik_ralt_pressed = false; // For combo to layer NAVMOD
-bool        combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode, keyrecord_t *record) {
-    switch (combo_index) {
-        case NAV_SHIFT_COMBO:
-
-            if (!ik_ralt_pressed) {
-                return false;
-            }
-            break;
-    }
-    return true;
-}
-void process_combo_event(uint16_t combo_index, bool pressed) {
-    switch (combo_index) {
-        case ERE_COMBO:
-            if (pressed) {
-                SEND_STRING(SS_RALT("s") "ksk"); // ère  On macOS, use SS_LOPT instead of SS_LALT
-                break;
-            }
-    }
-}
-
 void leader_start_user(void) {
     // Do something when the leader key is pressed
 }
@@ -221,269 +118,28 @@ void leader_end_user(void) {
     }
 }
 
-#define KC_LBRACKET KC_LBRC
-#define KC_RBRACKET KC_RBRC
-#define KC_BSLASH KC_BACKSLASH
-
-// ' "
-const key_override_t override_quote_ast   = ko_make_with_layers_and_negmods(MOD_MASK_SA, KC_QUOTE, S(KC_8), 0xFFFF, 0);
-const key_override_t override_quote_grave = ko_make_with_layers_and_negmods(MOD_MASK_ALT, KC_QUOTE, KC_GRAVE, 0xFFFF, 0);
-
-// ({[]})
-const key_override_t override_shift_9_0               = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, S(KC_9), S(KC_0), 0xFFFF, 0);
-const key_override_t override_shift_lbracket_rbracket = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, S(KC_LBRACKET), S(KC_RBRACKET), 0xFFFF, 0);
-const key_override_t override_lbracket_rbracket       = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_LBRACKET, KC_RBRACKET, 0xFFFF, 0);
-
-// < > = ~
-const key_override_t override_shift_comma_equal = ko_make_with_layers_and_negmods(MOD_MASK_SA, S(KC_COMMA), KC_EQUAL, 0xFFFF, 0);
-const key_override_t override_shift_comma_dot   = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, S(KC_COMMA), S(KC_DOT), 0xFFFF, 0);
-const key_override_t override_shift_comma_grave = ko_make_with_layers_and_negmods(MOD_MASK_ALT, S(KC_COMMA), S(KC_GRAVE), 0xFFFF, 0);
-
-// /\&|
-const key_override_t override_slash_shift7       = ko_make_with_layers_and_negmods(MOD_MASK_SA, KC_SLASH, S(KC_7), 0xFFFF, 0);
-const key_override_t override_slash_bslash_shift = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_SLASH, KC_BSLASH, 0xFFFF, 0);
-const key_override_t override_slash_bslash_ag    = ko_make_with_layers_and_negmods(MOD_MASK_ALT, KC_SLASH, S(KC_BSLASH), 0xFFFF, 0);
-
-// .,?!
-const key_override_t override_f13_exlm  = ko_make_with_layers_and_negmods(MOD_MASK_SA, KC_F13, KC_EXLM, 0xFFFF, 0);
-const key_override_t override_f13_comma = ko_make_with_layers_and_negmods(MOD_MASK_SHIFT, KC_F13, KC_COMMA, 0xFFFF, 0);
-const key_override_t override_f13_ques  = ko_make_with_layers_negmods_and_options(MOD_MASK_ALT, KC_F13, KC_QUES, 0xFFFF, 0, ko_option_activation_trigger_down);
-const key_override_t override_f13_dot   = ko_make_basic(0, KC_F13, KC_DOT);
-
-/* const key_override_t override_f13_shift1      = ko_make_basic(MOD_MASK_SA, KC_F13, S(KC_1)); */
-/* const key_override_t override_f13_comma       = ko_make_basic(MOD_MASK_SHIFT, KC_F13, KC_COMMA); */
-/* const key_override_t override_f13_shift_slash = ko_make_basic(MOD_MASK_ALT, KC_F13, S(KC_SLASH)); */
-/* const key_override_t override_f13_dot         = ko_make_basic(0, KC_F13, KC_DOT); */
-
-const key_override_t override_ralt_b = ko_make_with_layers_and_negmods(MOD_MASK_ALT, KC_T, RALT(KC_D), 0xFFFF, 0);
-
-// Create an array of pointers to the key overrides
-const key_override_t *key_overrides[] = {
-    &override_quote_ast,
-    &override_quote_grave,
-    &override_shift_9_0,
-    &override_shift_lbracket_rbracket,
-    &override_lbracket_rbracket,
-    &override_shift_comma_equal,
-    &override_shift_comma_dot,
-    &override_slash_shift7,
-    &override_slash_bslash_shift,
-    &override_slash_bslash_ag,
-    &override_shift_comma_grave,
-    &override_f13_exlm,
-    &override_f13_comma,
-    &override_f13_ques,
-    &override_f13_dot,
-    &override_ralt_b,
-    NULL // Null terminate the array
-};
-
-static uint8_t current_accel_level = 0; // 0=slow, 1=medium, 2=fast
-void send_repeated_movement(int8_t x, int8_t y) {
-    report_mouse_t report = {0};
-    uint8_t repeats = 1;
-
-    // Determine number of repeats based on acceleration level
-    if (current_accel_level == 1) {
-        repeats = 3;  // Triple for medium speed
-    } else if (current_accel_level == 2) {
-        repeats = 6;  // 6x for fast speed
-    }
-
-    report.x = x;
-    report.y = y;
-
-    // Send the report multiple times based on acceleration level
-    for (uint8_t i = 0; i < repeats; i++) {
-        pointing_device_set_report(report);
-        pointing_device_send();
-        // Small delay to ensure reports are processed
-        wait_ms(10);
-    }
-}
-static uint16_t current_grid_size = GRID_SIZE_DEFAULT;
-bool            process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!process_achordion(keycode, record)) {
-        return false;
-    }
-    if (record->event.pressed) {
-        switch (keycode) {
-            case KC_ACL0:
-                current_accel_level = 0;
-                break;
-            case KC_ACL1:
-                current_accel_level = 1;
-                break;
-            case KC_ACL2:
-                current_accel_level = 2;
-                break;
-        }
-    }
-    switch (keycode) {
-        case MS_STEP_UP:
-            if (record->event.pressed) {
-                tap_code16(KC_MS_UP);
-            }
-            return false;
-        case MS_STEP_DOWN:
-            if (record->event.pressed) {
-                tap_code16(KC_MS_DOWN);
-            }
-            return false;
-        case MS_STEP_LEFT:
-            if (record->event.pressed) {
-                tap_code16(KC_MS_LEFT);
-            }
-            return false;
-        case MS_STEP_RIGHT:
-            if (record->event.pressed) {
-                tap_code16(KC_MS_RIGHT);
-            }
-            return false;
-        case MS_GRID_LEFT:
-            if (record->event.pressed) {
-                send_repeated_movement(-current_grid_size, 0);
-            }
-            return false;
-
-        case MS_GRID_RIGHT:
-            if (record->event.pressed) {
-                send_repeated_movement(current_grid_size, 0);
-            }
-            return false;
-
-        case MS_GRID_UP:
-            if (record->event.pressed) {
-                send_repeated_movement(0, -current_grid_size);
-            }
-            return false;
-
-        case MS_GRID_DOWN:
-            if (record->event.pressed) {
-                send_repeated_movement(0, current_grid_size);
-            }
-            return false;
-
-        case MS_GRID_SIZE_RESET:
-            if (record->event.pressed) {
-                // Increase grid size by 10, with a maximum value
-                current_grid_size = GRID_SIZE_DEFAULT;
-
-#ifdef CONSOLE_ENABLE
-                // Print grid size (helpful for debugging)
-                uprintf("Grid size reset to: %d\n", current_grid_size);
-#endif
-            }
-            return false;
-        // Grid size adjustment keys
-        case MS_GRID_SIZE_UP:
-            if (record->event.pressed) {
-                // Increase grid size by the defined step, respecting maximum value
-                if (current_grid_size < GRID_SIZE_MAX) {
-                    current_grid_size = current_grid_size + GRID_SIZE_STEP;
-                }
-
-#ifdef CONSOLE_ENABLE
-                uprintf("Grid size: %d\n", current_grid_size);
-#endif
-            }
-            return false;
-
-        case MS_GRID_SIZE_DOWN:
-            if (record->event.pressed) {
-                // Decrease grid size by the defined step, respecting minimum value
-                if (current_grid_size > GRID_SIZE_MIN) {
-                    current_grid_size = current_grid_size - GRID_SIZE_STEP;
-                }
-
-#ifdef CONSOLE_ENABLE
-                uprintf("Grid size: %d\n", current_grid_size);
-#endif
-            }
-            return false;
-    }
-
-    /* if (record->event.key.row * MATRIX_COLS + record->event.key.col == IK_RALT) { */
-    /*     ik_ralt_pressed = record->event.pressed; */
-    /* } */
-    /* #ifdef CONSOLE_ENABLE */
-    /*     print("active modif "); */
-    /*     dprint("Debug enabled") */
-    /*     uprintf("%s active_modifiers" , active_modifiers); */
-    /* #endif */
-    /* active_modifiers = get_mods() | get_oneshot_mods() ;  */
-    /* dprintf("\n\n\npressed kc: 0x%04X\n", keycode); */
-    /* dprintf("LCTL_T: 0x%04X, RCTL_T: 0x%04X, LCTL: 0x%04X\n", LCTL_T(KC_A),RCTL_T(KC_SCLN), KC_LCTL); */
-    /*     dprintf("LSFT_T(KC_S): 0x%04X, kc_s: 0x%04X\n\n\n", LSFT_T(KC_S), KC_S); */
-    return true;
-}
-
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     // To change tap term per key
     return TAPPING_TERM;
-    /* switch (keycode) { */
-    /*     case SFT_T(KC_SPC): */
-    /*         return TAPPING_TERM + 1250; */
-    /*     case LT(1, KC_GRV): */
-    /*         return 130; */
-    /*     default: */
-    /*         return TAPPING_TERM; */
-    /* } */
 }
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_achordion(keycode, record)) {
+        return false;
+    }
+
+    // Handle mouse-related keycodes
+    if (!process_mouse_keycode(keycode, record)) {
+        return false;
+    }
+
+    return true;
+}
+
 void matrix_scan_user(void) {
     achordion_task();
 }
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    // RGB_MATRIX_INDICATOR_SET_COLOR(index, red, green, blue);
 
-    switch (get_highest_layer(layer_state | default_layer_state)) {
-        case 7:
-            rgb_matrix_sethsv(HSV_LAYOUT_7);
-            /* rgb_matrix_set_color(HOME_KEY_LED_INDEX, RGB_LAYOUT_0); */
-            break;
-        case 6:
-            rgb_matrix_sethsv(HSV_LAYOUT_6);
-            /* rgb_matrix_set_color(HOME_KEY_LED_INDEX, RGB_LAYOUT_0); */
-            break;
-        case 5:
-            rgb_matrix_sethsv(HSV_LAYOUT_5);
-            /* rgb_matrix_set_color(HOME_KEY_LED_INDEX, RGB_LAYOUT_0); */
-            break;
-        case 4:
-            rgb_matrix_sethsv(HSV_LAYOUT_4);
-            /* rgb_matrix_set_color(HOME_KEY_LED_INDEX, RGB_LAYOUT_0); */
-            break;
-        case 3:
-            rgb_matrix_sethsv(HSV_LAYOUT_3); // Cyan
-            /* rgb_matrix_set_color(HOME_KEY_LED_INDEX, RGB_LAYOUT_0); */
-            break;
-        case 2:
-            /* rgb_matrix_set_color(i, RGB_BLUE); */
-            rgb_matrix_sethsv(HSV_LAYOUT_2); // Red
-            /* rgb_matrix_set_color(HOME_KEY_LED_INDEX, RGB_LAYOUT_0); */
-            break;
-        case 1:
-            /* rgb_matrix_set_color(i, RGB_YELLOW); */
-            rgb_matrix_sethsv(HSV_LAYOUT_1); // Green
-            /* rgb_matrix_set_color(IK_INSERT, RGB_LAYOUT_0); */
-            break;
-        case 0:
-            /* rgb_matrix_set_color(i, RGB_GREEN); */
-            rgb_matrix_sethsv(HSV_LAYOUT_0); // Purple
-            /* rgb_matrix_set_color(IK_INSERT, RGB_LAYOUT_1); */
-            break;
-        default:
-            break;
-    }
-    for (uint8_t i = led_min; i < led_max; i++) {
-        if (host_keyboard_led_state().caps_lock) {
-            if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
-                rgb_matrix_set_color(i, 255, 255, 255);
-            }
-        }
-    }
-    return false;
-}
 #ifdef OTHER_KEYMAP_C
 #    include OTHER_KEYMAP_C
 #endif // OTHER_KEYMAP_C
