@@ -57,7 +57,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 //    ┌──────┬───────────────┬───────────────┬───────────────┬───────────────┬─────────┐                    ┌─────────┬─────────┬─────────┬─────────┬─────────┬─────────┐
-//    │ S(,) │      esc      │    LCTL(z)    │    LCTL(x)    │    LCTL(v)    │ LCTL(b) │                    │   no    │  S(2)   │  S(3)   │  S(4)   │  S(5)   │   no    │
+//    │ S(,) │      esc      │    LCTL(z)    │    LCTL(x)    │    LCTL(v)    │ LCTL(b) │                    │   no    │  S(0)   │  S(])   │    ]    │  S(.)   │   no    │
 //    ├──────┼───────────────┼───────────────┼───────────────┼───────────────┼─────────┤                    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
 //    │ f13  │ OSM(MOD_LCTL) │ OSM(MOD_LSFT) │ OSM(MOD_LGUI) │ OSM(MOD_LALT) │   no    │                    │    -    │  S(9)   │  S([)   │    [    │  S(,)   │ LSFT(=) │
 //    ├──────┼───────────────┼───────────────┼───────────────┼───────────────┼─────────┤                    ├─────────┼─────────┼─────────┼─────────┼─────────┼─────────┤
@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //                                                           │               │         │     │       │ lsft │  bspc   │   del   │
 //                                                           └───────────────┴─────────┴─────┘       └──────┴─────────┴─────────┘
 [SYM] = LAYOUT_split_3x6_3(
-  S(KC_COMM) , KC_ESC        , LCTL(KC_Z)    , LCTL(KC_X)    , LCTL(KC_V)    , LCTL(KC_B) ,                             KC_NO      , S(KC_2)    , S(KC_3)    , S(KC_4)    , S(KC_5)    , KC_NO       ,
+  S(KC_COMM) , KC_ESC        , LCTL(KC_Z)    , LCTL(KC_X)    , LCTL(KC_V)    , LCTL(KC_B) ,                             KC_NO      , S(KC_0)    , S(KC_RBRC) , KC_RBRC    , S(KC_DOT)  , KC_NO       ,
   KC_F13     , OSM(MOD_LCTL) , OSM(MOD_LSFT) , OSM(MOD_LGUI) , OSM(MOD_LALT) , KC_NO      ,                             KC_MINS    , S(KC_9)    , S(KC_LBRC) , KC_LBRC    , S(KC_COMM) , LSFT(KC_EQL),
   KC_QUOT    , KC_NO         , KC_NO         , KC_NO         , KC_TAB        , KC_NO      ,                             LSFT(KC_6) , LSFT(KC_7) , LSFT(KC_8) , LSFT(KC_9) , LSFT(KC_0) , KC_SLSH     ,
                                                                _______       , _______    , _______ ,         KC_LSFT , KC_BSPC    , KC_DEL
