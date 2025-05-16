@@ -1,4 +1,3 @@
-// #define SPLIT_USB_TIMEOUT 5000
 #define TAPPING_TERM 200
 #define CTRL_TIMEOUT 1000
 /* #define CTRL_TIMEOUT (TAPPING_TERM + 500) */
@@ -11,7 +10,7 @@
 #define COMBO_SHOULD_TRIGGER
 
 // MOUSE CONTROL
-#define MOUSEKEY_MOVE_DELTA 10
+// #define MOUSEKEY_MOVE_DELTA 10
 
 // Grid movement configuration
 #define GRID_SIZE_DEFAULT 60
@@ -20,27 +19,35 @@
 #define GRID_SIZE_MAX 120
 
 #define MK_3_SPEED
+#define MK_MOMENTARY_ACCEL
+
+#define MK_C_OFFSET_UNMOD 32
+#define MK_C_INTERVAL_UNMOD 16
 
 // Acceleration 0 (Slow)
-#define MK_C_OFFSET_0 8
+#define MK_C_OFFSET_0 2
 #define MK_C_INTERVAL_0 16
 
-// Acceleration 1 (Medium)
-#define MK_C_OFFSET_1 16
+// Acceleration 1 (Medium) regular in momentary accel
+#define MK_C_OFFSET_1 4
 #define MK_C_INTERVAL_1 16
 
 // Acceleration 2 (Fast)
 #define MK_C_OFFSET_2 32
-#define MK_C_INTERVAL_2 16
+#define MK_C_INTERVAL_2 8
 
 // Default mouse wheel settings
+
+#define MK_W_OFFSET_UNMOD	1
+#define MK_W_INTERVAL_UNMOD 40
+
 // Acceleration 0 (Slow)
 #define MK_W_OFFSET_0 1
-#define MK_W_INTERVAL_0 100
+#define MK_W_INTERVAL_0 200
 
 // Acceleration 1 (Medium)
-#define MK_W_OFFSET_1 3
-#define MK_W_INTERVAL_1 50
+#define MK_W_OFFSET_1 1
+#define MK_W_INTERVAL_1 100
 
 // Acceleration 2 (Fast)
 #define MK_W_OFFSET_2 8
