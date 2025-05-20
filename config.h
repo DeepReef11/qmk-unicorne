@@ -13,46 +13,41 @@
 // #define MOUSEKEY_MOVE_DELTA 10
 
 // Grid movement configuration
-#define GRID_SIZE_DEFAULT 5
+#define GRID_SIZE_DEFAULT 10
 #define GRID_SIZE_STEP 5
 #define GRID_SIZE_MIN 5
 #define GRID_SIZE_MAX 120
 
+
 #define MK_3_SPEED
 #define MK_MOMENTARY_ACCEL
 
-#define MK_C_OFFSET_UNMOD 4
+//Default accel
+#define MK_C_OFFSET_UNMOD 10
 #define MK_C_INTERVAL_UNMOD 16
-
-// Acceleration 0 (Slow)
-#define MK_C_OFFSET_0 2
-#define MK_C_INTERVAL_0 16
-
-// Acceleration 1 (Medium) regular in momentary accel
-#define MK_C_OFFSET_1 20
-#define MK_C_INTERVAL_1 16
-
-// Acceleration 2 (Fast)
-#define MK_C_OFFSET_2 32
-#define MK_C_INTERVAL_2 8
-
 // Default mouse wheel settings
-
 #define MK_W_OFFSET_UNMOD	1
 #define MK_W_INTERVAL_UNMOD 100
 
 // Acceleration 0 (Slow)
+#define MK_C_OFFSET_0 2
+#define MK_C_INTERVAL_0 16
 #define MK_W_OFFSET_0 1
 #define MK_W_INTERVAL_0 200
 
-// Acceleration 1 (Medium)
+// Acceleration 1 (Medium) regular in momentary accel
+#define MK_C_OFFSET_1 50
+#define MK_C_INTERVAL_1 16
 #define MK_W_OFFSET_1 1
 #define MK_W_INTERVAL_1 40
 
 // Acceleration 2 (Fast)
+#define MK_C_OFFSET_2 125
+#define MK_C_INTERVAL_2 8
 #define MK_W_OFFSET_2 8
 #define MK_W_INTERVAL_2 20
 
+// RGB
 #define RGB_MATRIX_KEYRELEASES
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_DEFAULT_SPD 10
