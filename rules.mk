@@ -1,9 +1,10 @@
-POINTING_DEVICE_ENABLE = false
 AUDIO_ENABLE = false
 ENCODER_ENABLE = no
 
 REPEAT_KEY_ENABLE = yes
 
+# Prevent mouse moving alone because of absence of joystick
+# POINTING_DEVICE_ENABLE = false
 POINTING_DEVICE_ENABLE = yes
 POINTING_DEVICE_DRIVER = custom
 
