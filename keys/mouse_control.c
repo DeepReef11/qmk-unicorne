@@ -1,43 +1,72 @@
 #include "mouse_control.h"
+#include "deferred_exec.h"
+#include <stdint.h>
 
-uint8_t  current_accel_level = 0; // 0=slow, 1=medium, 2=fast
-uint16_t current_grid_size   = GRID_SIZE_DEFAULT;
+/* uint8_t  current_accel_level = 0; // 0=slow, 1=medium, 2=fast */
+uint16_t        current_grid_size    = GRID_SIZE_DEFAULT;
 
-void send_repeated_movement(int8_t x, int8_t y) {
-    report_mouse_t report  = {0};
-    uint8_t        repeats = 1;
+/* void send_repeated_movement(int8_t x, int8_t y) { */
+/*     report_mouse_t report  = {0}; */
+/*     uint8_t        repeats = 1; */
+/**/
+/*     // Determine number of repeats based on acceleration level */
+/*     if (current_accel_level == 1) { */
+/*         repeats = 3; // Triple for medium speed */
+/*     } else if (current_accel_level == 2) { */
+/*         repeats = 6; // 6x for fast speed */
+/*     } */
+/**/
+/*     report.x = x; */
+/*     report.y = y; */
+/**/
+/*     // Send the report multiple times based on acceleration level */
+/*     for (uint8_t i = 0; i < repeats; i++) { */
+/*         pointing_device_set_report(report); */
+/*         pointing_device_send(); */
+/*         // Small delay to ensure reports are processed */
+/*         wait_ms(10); */
+/*     } */
+/* } */
 
-    // Determine number of repeats based on acceleration level
-    if (current_accel_level == 1) {
-        repeats = 3; // Triple for medium speed
-    } else if (current_accel_level == 2) {
-        repeats = 6; // 6x for fast speed
-    }
-
-    report.x = x;
-    report.y = y;
-
-    // Send the report multiple times based on acceleration level
-    for (uint8_t i = 0; i < repeats; i++) {
-        pointing_device_set_report(report);
-        pointing_device_send();
-        // Small delay to ensure reports are processed
-        wait_ms(10);
-    }
+uint32_t mouse_key_release(uint32_t trigger_time, void *cb_arg) {
+    uint16_t keycode = (uint16_t)(uintptr_t)cb_arg;
+    unregister_code16(keycode);
+    return 0; // Don't repeat
 }
+
+
+void send_mouse_tap(uint16_t keycode) {
+    // Press the key
+    register_code16(keycode);
+
+    // Schedule release after delay, non-blocking
+    uint32_t delay = (current_grid_size * 5);
+    defer_exec(delay, mouse_key_release, (void*)(uintptr_t)keycode);
+}
+
+/* void send_tap_mouse_key(uint16_t key_code) { */
+/*     // Press the key */
+/*     register_code16(key_code); */
+/**/
+/*     // Hold based on grid size (larger grid = longer press) */
+/*     wait_ms(current_grid_size * 20); // Scale duration by grid size */
+/**/
+/*     // Release the key */
+/*     unregister_code16(key_code); */
+/* } */
 
 bool process_mouse_keycode(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
         switch (keycode) {
-            case MS_ACL0:
-                current_accel_level = 0;
-                return true;
-            case MS_ACL1:
-                current_accel_level = 1;
-                return true;
-            case MS_ACL2:
-                current_accel_level = 2;
-                return true;
+            /* case MS_ACL0: */
+            /*     current_accel_level = 0; */
+            /*     return true; */
+            /* case MS_ACL1: */
+            /*     current_accel_level = 1; */
+            /*     return true; */
+            /* case MS_ACL2: */
+            /*     current_accel_level = 2; */
+            /*     return true; */
             case MS_STEP_UP:
                 tap_code16(KC_MS_UP);
                 return false;
@@ -51,16 +80,16 @@ bool process_mouse_keycode(uint16_t keycode, keyrecord_t *record) {
                 tap_code16(KC_MS_RIGHT);
                 return false;
             case MS_GRID_LEFT:
-                send_repeated_movement(-current_grid_size, 0);
+                send_mouse_tap(KC_MS_LEFT);
                 return false;
             case MS_GRID_RIGHT:
-                send_repeated_movement(current_grid_size, 0);
+                send_mouse_tap(KC_MS_RIGHT);
                 return false;
             case MS_GRID_UP:
-                send_repeated_movement(0, -current_grid_size);
+                send_mouse_tap(KC_MS_UP);
                 return false;
             case MS_GRID_DOWN:
-                send_repeated_movement(0, current_grid_size);
+                send_mouse_tap(KC_MS_DOWN);
                 return false;
             case MS_GRID_SIZE_RESET:
                 // Reset grid size to default
@@ -83,3 +112,4 @@ bool process_mouse_keycode(uint16_t keycode, keyrecord_t *record) {
 
     return true;
 }
+

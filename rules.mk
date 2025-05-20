@@ -15,6 +15,7 @@ RGB_MATRIX_ENABLE = yes
 ENCODER_MAP_ENABLE = yes
 KEY_LOCK_ENABLE = yes
 CONSOLE_ENABLE = yes
+DEFERRED_EXEC_ENABLE = yes
 SRC += features/achordion.c
 SRC += keys/combos.c
 SRC += keys/key_overrides.c
