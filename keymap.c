@@ -6,7 +6,7 @@
 #include "keys/mouse_control.h"
 #include "leader.h"
 
-// Keymaps definition
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //    ┌──────┬───────────┬───────────┬───────────┬───────────────┬─────────┐                             ┌─────────────────┬─────────────┬───────────┬───────────┬───────────┬──────┐
 //    │ S(,) │     q     │     w     │     e     │       r       │    t    │                             │        y        │      u      │     i     │     o     │     p     │ bspc │
@@ -104,6 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                           _______    , KC_F16  , KC_F20 ,         KC_LSFT , KC_BSPC , KC_DEL
 )
 };
+// clang-format on
 
 void leader_start_user(void) {
     // Do something when the leader key is pressed
