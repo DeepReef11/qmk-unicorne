@@ -72,18 +72,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                _______       , _______    , _______ ,         KC_LSFT , KC_BSPC    , KC_DEL
 ),
 
-//    ┌──────┬──────┬──────┬──────┬─────────┬───────────────────┐                        ┌─────────┬──────────────┬──────────────┬────────────┬───────────────┬─────────┐
-//    │ S(,) │ esc  │ btn3 │ btn2 │  btn1   │  MS_GRID_SIZE_UP  │                        │ LSFT(1) │ MS_STEP_LEFT │ MS_STEP_DOWN │ MS_STEP_UP │ MS_STEP_RIGHT │   no    │
-//    ├──────┼──────┼──────┼──────┼─────────┼───────────────────┤                        ├─────────┼──────────────┼──────────────┼────────────┼───────────────┼─────────┤
-//    │ f13  │ btn2 │ wh_d │ wh_u │  btn1   │ MS_GRID_SIZE_boot │                        │  S(-)   │     ms_l     │     ms_d     │    ms_u    │     ms_r      │ LSFT(4) │
-//    ├──────┼──────┼──────┼──────┼─────────┼───────────────────┤                        ├─────────┼──────────────┼──────────────┼────────────┼───────────────┼─────────┤
-//    │  '   │  no  │  no  │  no  │   tab   │ MS_GRID_SIZE_DOWN │                        │ LSFT(6) │ MS_GRID_LEFT │ MS_GRID_DOWN │ MS_GRID_UP │ MS_GRID_RIGHT │    /    │
-//    └──────┴──────┴──────┴──────┼─────────┼───────────────────┼─────────┐       ┌──────┼─────────┼──────────────┼──────────────┴────────────┴───────────────┴─────────┘
-//                                │ MS_ACL0 │      MS_ACL1      │ MS_ACL2 │       │ lsft │  bspc   │     del      │
-//                                └─────────┴───────────────────┴─────────┘       └──────┴─────────┴──────────────┘
+//    ┌──────┬─────────┬──────┬──────┬─────────┬───────────────────┐                        ┌─────────┬──────────────┬──────────────┬────────────┬───────────────┬─────────┐
+//    │ S(,) │   esc   │ btn3 │ btn2 │  btn1   │  MS_GRID_SIZE_UP  │                        │ LSFT(1) │ MS_STEP_LEFT │ MS_STEP_DOWN │ MS_STEP_UP │ MS_STEP_RIGHT │   no    │
+//    ├──────┼─────────┼──────┼──────┼─────────┼───────────────────┤                        ├─────────┼──────────────┼──────────────┼────────────┼───────────────┼─────────┤
+//    │ f13  │ MS_ACL0 │ wh_d │ wh_u │  btn1   │ MS_GRID_SIZE_boot │                        │  S(-)   │     ms_l     │     ms_d     │    ms_u    │     ms_r      │ LSFT(4) │
+//    ├──────┼─────────┼──────┼──────┼─────────┼───────────────────┤                        ├─────────┼──────────────┼──────────────┼────────────┼───────────────┼─────────┤
+//    │  '   │   no    │  no  │  no  │   tab   │ MS_GRID_SIZE_DOWN │                        │ LSFT(6) │ MS_GRID_LEFT │ MS_GRID_DOWN │ MS_GRID_UP │ MS_GRID_RIGHT │    /    │
+//    └──────┴─────────┴──────┴──────┼─────────┼───────────────────┼─────────┐       ┌──────┼─────────┼──────────────┼──────────────┴────────────┴───────────────┴─────────┘
+//                                   │ MS_ACL0 │      MS_ACL1      │ MS_ACL2 │       │ lsft │  bspc   │     del      │
+//                                   └─────────┴───────────────────┴─────────┘       └──────┴─────────┴──────────────┘
 [MOUSE] = LAYOUT_split_3x6_3(
   S(KC_COMM) , KC_ESC  , KC_BTN3 , KC_BTN2 , KC_BTN1 , MS_GRID_SIZE_UP    ,                             LSFT(KC_1) , MS_STEP_LEFT , MS_STEP_DOWN , MS_STEP_UP , MS_STEP_RIGHT , KC_NO     ,
-  KC_F13     , KC_BTN2 , KC_WH_D , KC_WH_U , KC_BTN1 , MS_GRID_SIZE_RESET ,                             S(KC_MINS) , KC_MS_L      , KC_MS_D      , KC_MS_U    , KC_MS_R       , LSFT(KC_4),
+  KC_F13     , MS_ACL0 , KC_WH_D , KC_WH_U , KC_BTN1 , MS_GRID_SIZE_RESET ,                             S(KC_MINS) , KC_MS_L      , KC_MS_D      , KC_MS_U    , KC_MS_R       , LSFT(KC_4),
   KC_QUOT    , KC_NO   , KC_NO   , KC_NO   , KC_TAB  , MS_GRID_SIZE_DOWN  ,                             LSFT(KC_6) , MS_GRID_LEFT , MS_GRID_DOWN , MS_GRID_UP , MS_GRID_RIGHT , KC_SLSH   ,
                                              MS_ACL0 , MS_ACL1            , MS_ACL2 ,         KC_LSFT , KC_BSPC    , KC_DEL
 ),
